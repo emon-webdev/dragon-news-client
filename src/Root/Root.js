@@ -9,21 +9,21 @@ import RightSideNav from "../Pages/Shared/RightSideNav";
 const Root = () => {
   return (
     <div>
-        <Header/>
+      <Header />
       <Container>
         <Row>
           <Col lg="2" className="d-none d-lg-block">
-            <LeftSideNav/>
+            <LeftSideNav />
           </Col>
           <Col lg="7">
             <Outlet />
           </Col>
-          <Col lg="3">
-           <RightSideNav/>
+          <Col lg="3" >
+            <RightSideNav />
           </Col>
         </Row>
-      </Container> 
-      <Footer/>
+      </Container>
+      <Footer />
     </div>
   );
 };

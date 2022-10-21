@@ -1,4 +1,5 @@
-import React from "react";
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Carousel from "react-bootstrap/Carousel";
@@ -6,17 +7,34 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { BsGithub, BsWhatsapp } from "react-icons/bs";
 import { FaFacebook, FaTwitch, FaTwitter } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import Brand1 from '../../images/Brand1.png';
-import Brand2 from '../../images/Brand2.png';
-
-
+import { AuthContext } from "../../contexts/AuthProvider";
+import Brand1 from "../../images/Brand1.png";
+import Brand2 from "../../images/Brand2.png";
 
 const RightSideNav = () => {
+  const { googleLogin } = useContext(AuthContext);
+  //google provider
+  const googleProvider = new GoogleAuthProvider();
+
+  //google sign in
+  const handleGoogleSignIn = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div>
       <h2>Right Side Nav</h2>
       <ButtonGroup vertical>
-        <Button className="mb-2" variant="outline-primary">
+        <Button
+          onClick={handleGoogleSignIn}
+          className="mb-2"
+          variant="outline-primary"
+        >
           Login with google <FcGoogle />
         </Button>
         <Button className="mb-2" variant="outline-secondary">
@@ -47,25 +65,13 @@ const RightSideNav = () => {
       <div>
         <Carousel>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Brand1}
-              alt="First slide"
-            />
+            <img className="d-block w-100" src={Brand1} alt="First slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Brand2}
-              alt="Second slide"
-            />
+            <img className="d-block w-100" src={Brand2} alt="Second slide" />
           </Carousel.Item>
           <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Brand1}
-              alt="Third slide"
-            />
+            <img className="d-block w-100" src={Brand1} alt="Third slide" />
           </Carousel.Item>
         </Carousel>
       </div>
